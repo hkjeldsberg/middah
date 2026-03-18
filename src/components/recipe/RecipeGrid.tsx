@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import {
   DndContext,
   closestCenter,
@@ -42,6 +42,10 @@ interface RecipeGridProps {
 
 export default function RecipeGrid({ initialRecipes }: RecipeGridProps) {
   const [recipes, setRecipes] = useState(initialRecipes)
+
+  useEffect(() => {
+    setRecipes(initialRecipes)
+  }, [initialRecipes])
 
   const sensors = useSensors(
     useSensor(PointerSensor, {

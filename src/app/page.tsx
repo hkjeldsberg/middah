@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { supabaseServer } from '@/lib/supabase/server'
 import { rowToRecipe } from '@/types'
 import type { RecipeRow } from '@/types'
@@ -36,7 +37,9 @@ export default async function HomePage({ searchParams }: PageProps) {
         </Link>
       </div>
 
-      <RecipeFilters />
+      <Suspense>
+        <RecipeFilters />
+      </Suspense>
 
       {recipes.length === 0 ? (
         <EmptyState
