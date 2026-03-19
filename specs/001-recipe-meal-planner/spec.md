@@ -42,7 +42,7 @@ AI or meal planner functionality.
 
 A user navigates to the meal planner page. They select one or more cuisines from a default
 list (Indian, Thai, South American, Scandinavian, Italian, Mediterranean, Chinese, Spanish,
-Mexican, Turkish, Greek, Georgian) and trigger meal generation. The planner fills a 7-day
+Mexican, Turkish, Greek, Georgian, Middle East) and trigger meal generation. The planner fills a 7-day
 week view with one dinner suggestion per day (title only). Triggering a full week generation
 always replaces all 7 days, including any previously skipped days. For each suggested meal
 the user can: edit the title inline, regenerate just that meal, swap it with another day's
@@ -145,7 +145,7 @@ after saving.
 - **FR-012**: The meal planner MUST display a 7-day week view with one dinner slot per day.
 - **FR-013**: Users MUST be able to select one or more cuisines from at least: Indian, Thai,
   South American, Scandinavian, Italian, Mediterranean, Chinese, Spanish, Mexican, Turkish,
-  Greek, Georgian.
+  Greek, Georgian, Middle Eastern.
 - **FR-014**: Triggering full week generation MUST populate all 7 days (including previously
   skipped days) with AI-suggested dinner titles based on the selected cuisines.
 - **FR-015**: For each day in the meal planner, users MUST be able to regenerate that single

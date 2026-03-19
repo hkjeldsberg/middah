@@ -13,6 +13,7 @@ const CUISINES = [
   { value: 'tyrkisk', label: 'Tyrkisk' },
   { value: 'gresk', label: 'Gresk' },
   { value: 'georgisk', label: 'Georgisk' },
+  { value: 'middle-east', label: 'Midtøsten' },
 ]
 
 interface CuisineSelectorProps {
