@@ -105,16 +105,16 @@
 
 ### API Routes for User Story 2
 
-- [ ] T034 [P] [US2] Implement `GET /api/meal-plans/current` (find or create meal plan for the ISO-week containing today; create 7 `meal_plan_days` rows with status `empty` if new; return full plan with days) in `src/app/api/meal-plans/current/route.ts`
-- [ ] T035 [P] [US2] Implement `POST /api/meal-plans/generate` (accept `{planId, cuisines[]}`; call `generateMealTitles()` for all non-skipped days; update `meal_title` and set `status = 'suggested'`; return updated plan) in `src/app/api/meal-plans/generate/route.ts`
-- [ ] T036 [P] [US2] Implement `PATCH /api/meal-plans/[planId]/days/[dayId]` (accept `{action: 'skip' | 'swap' | 'regenerate', withDayId?}`; for regenerate call `generateMealTitles()` for one day; for swap exchange `meal_title` and `recipe_id` between two days; for skip set `status = 'skipped'`; return updated plan) in `src/app/api/meal-plans/[planId]/days/[dayId]/route.ts`
+- [X] T03x [P] [US2] Implement `GET /api/meal-plans/current` (find or create meal plan for the ISO-week containing today; create 7 `meal_plan_days` rows with status `empty` if new; return full plan with days) in `src/app/api/meal-plans/current/route.ts`
+- [X] T03x [P] [US2] Implement `POST /api/meal-plans/generate` (accept `{planId, cuisines[]}`; call `generateMealTitles()` for all non-skipped days; update `meal_title` and set `status = 'suggested'`; return updated plan) in `src/app/api/meal-plans/generate/route.ts`
+- [X] T03x [P] [US2] Implement `PATCH /api/meal-plans/[planId]/days/[dayId]` (accept `{action: 'skip' | 'swap' | 'regenerate', withDayId?}`; for regenerate call `generateMealTitles()` for one day; for swap exchange `meal_title` and `recipe_id` between two days; for skip set `status = 'skipped'`; return updated plan) in `src/app/api/meal-plans/[planId]/days/[dayId]/route.ts`
 
 ### Meal Planner Components
 
-- [ ] T037 [P] [US2] Build CuisineSelector component: multi-select chip group with 6 default cuisines (Indisk, Thai, Sør-Amerikansk, Skandinavisk, Italiensk, Middelhavet); selected chips highlighted; at least one must be selected to enable generate button in `src/components/meal-planner/CuisineSelector.tsx`
-- [ ] T038 [P] [US2] Build DaySlot component: shows weekday name (Norwegian), meal title or empty/skipped placeholder; action menu button revealing options "Regenerer", "Bytt dag" (opens day picker), "Hopp over"; skeleton state during generation in `src/components/meal-planner/DaySlot.tsx`
-- [ ] T039 [US2] Build WeekView component: 7 DaySlot components in a responsive grid (1-col mobile, 7-col desktop); manages selected-for-swap state; handles all day-action callbacks and fires appropriate PATCH calls in `src/components/meal-planner/WeekView.tsx`
-- [ ] T040 [US2] Build meal planner page: fetch current plan from `GET /api/meal-plans/current`; render CuisineSelector + "Generer uke" button + WeekView; show Norwegian error message with retry on generation failure in `src/app/meal-planner/page.tsx`
+- [X] T03x [P] [US2] Build CuisineSelector component: multi-select chip group with 6 default cuisines (Indisk, Thai, Sør-Amerikansk, Skandinavisk, Italiensk, Middelhavet); selected chips highlighted; at least one must be selected to enable generate button in `src/components/meal-planner/CuisineSelector.tsx`
+- [X] T03x [P] [US2] Build DaySlot component: shows weekday name (Norwegian), meal title or empty/skipped placeholder; action menu button revealing options "Regenerer", "Bytt dag" (opens day picker), "Hopp over"; skeleton state during generation in `src/components/meal-planner/DaySlot.tsx`
+- [X] T03x [US2] Build WeekView component: 7 DaySlot components in a responsive grid (1-col mobile, 7-col desktop); manages selected-for-swap state; handles all day-action callbacks and fires appropriate PATCH calls in `src/components/meal-planner/WeekView.tsx`
+- [X] T04x [US2] Build meal planner page: fetch current plan from `GET /api/meal-plans/current`; render CuisineSelector + "Generer uke" button + WeekView; show Norwegian error message with retry on generation failure in `src/app/meal-planner/page.tsx`
 
 **Checkpoint**: Meal planner generates 7 Norwegian dinner titles, individual days can be regenerated/swapped/skipped, week state persists in database.
 
@@ -126,10 +126,10 @@
 
 **Independent Test**: From meal planner, click "Lag oppskrift" on a suggested meal → full recipe appears in recipe detail view → click "Lagre" → recipe appears in the recipe list.
 
-- [ ] T041 [US3] Implement `POST /api/meal-plans/[planId]/days/[dayId]/generate-recipe` (call `generateRecipe(mealTitle)` with Claude Sonnet; return structured recipe JSON matching the Recipe type; do NOT save to DB — caller decides) in `src/app/api/meal-plans/[planId]/days/[dayId]/generate-recipe/route.ts`
-- [ ] T042 [US3] Add "Lag oppskrift" action to DaySlot (only when `status === 'suggested'`); on click call generate-recipe endpoint and pass result via URL state/query to recipe preview page in `src/components/meal-planner/DaySlot.tsx`
-- [ ] T043 [US3] Build recipe preview page for AI-generated recipes: render RecipeDetail in read-only preview mode with "Lagre oppskrift" button; on save call `POST /api/recipes` (and image upload if applicable) then redirect to `/recipes/[id]` in `src/app/recipes/preview/page.tsx`
-- [ ] T044 [US3] After saving a generated recipe update the corresponding `meal_plan_days.recipe_id` by calling `PATCH /api/meal-plans/[planId]/days/[dayId]` with `{action: 'link', recipeId}`; add `link` action handler to the PATCH route in `src/app/api/meal-plans/[planId]/days/[dayId]/route.ts`
+- [X] T04x [US3] Implement `POST /api/meal-plans/[planId]/days/[dayId]/generate-recipe` (call `generateRecipe(mealTitle)` with Claude Sonnet; return structured recipe JSON matching the Recipe type; do NOT save to DB — caller decides) in `src/app/api/meal-plans/[planId]/days/[dayId]/generate-recipe/route.ts`
+- [X] T04x [US3] Add "Lag oppskrift" action to DaySlot (only when `status === 'suggested'`); on click call generate-recipe endpoint and pass result via URL state/query to recipe preview page in `src/components/meal-planner/DaySlot.tsx`
+- [X] T04x [US3] Build recipe preview page for AI-generated recipes: render RecipeDetail in read-only preview mode with "Lagre oppskrift" button; on save call `POST /api/recipes` (and image upload if applicable) then redirect to `/recipes/[id]` in `src/app/recipes/preview/page.tsx`
+- [X] T04x [US3] After saving a generated recipe update the corresponding `meal_plan_days.recipe_id` by calling `PATCH /api/meal-plans/[planId]/days/[dayId]` with `{action: 'link', recipeId}`; add `link` action handler to the PATCH route in `src/app/api/meal-plans/[planId]/days/[dayId]/route.ts`
 
 **Checkpoint**: Full recipe generated from meal title in Norwegian, displayed in recipe detail view, saveable to recipe list where it appears with thumbnail and preparation time.
 
@@ -139,11 +139,11 @@
 
 **Purpose**: Improvements that span all user stories.
 
-- [ ] T045 [P] Responsive layout audit: test every page at 375 px viewport; verify ingredient + instruction columns stack vertically on recipe detail; verify meal planner week view shows as single column on mobile
-- [ ] T046 [P] Touch target audit: measure all interactive elements (RecipeCard, NavBar links, action buttons, DaySlot menu, form inputs) on mobile; any element below 44 px × 44 px MUST be resized
-- [ ] T047 [P] Error state implementation: wrap all `fetch` calls in try/catch; render Norwegian actionable error messages with retry buttons in every component that calls an API; ensure no component is left in a loading state on network failure
-- [ ] T048 [P] Norwegian language audit: scan all `.tsx` files for any English UI strings, placeholders, or aria-labels; replace with Norwegian Bokmål equivalents
-- [ ] T049 Offline degradation: verify recipe list and detail pages show EmptyState (not a crash) when Supabase is unreachable; verify meal planner shows error state (not blank) when AI call fails
+- [X] T04x [P] Responsive layout audit: test every page at 375 px viewport; verify ingredient + instruction columns stack vertically on recipe detail; verify meal planner week view shows as single column on mobile
+- [X] T04x [P] Touch target audit: measure all interactive elements (RecipeCard, NavBar links, action buttons, DaySlot menu, form inputs) on mobile; any element below 44 px × 44 px MUST be resized
+- [X] T04x [P] Error state implementation: wrap all `fetch` calls in try/catch; render Norwegian actionable error messages with retry buttons in every component that calls an API; ensure no component is left in a loading state on network failure
+- [X] T04x [P] Norwegian language audit: scan all `.tsx` files for any English UI strings, placeholders, or aria-labels; replace with Norwegian Bokmål equivalents
+- [X] T04x Offline degradation: verify recipe list and detail pages show EmptyState (not a crash) when Supabase is unreachable; verify meal planner shows error state (not blank) when AI call fails
 
 ---
 

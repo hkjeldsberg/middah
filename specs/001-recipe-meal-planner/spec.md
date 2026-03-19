@@ -41,10 +41,12 @@ AI or meal planner functionality.
 ### User Story 2 - Weekly Meal Planner (Priority: P2)
 
 A user navigates to the meal planner page. They select one or more cuisines from a default
-list (Indian, Thai, South American, Scandinavian, Italian, Mediterranean) and trigger meal
-generation. The planner fills a 7-day week view with one dinner suggestion per day (title
-only). For each suggested meal the user can: regenerate just that meal, swap it with another
-day's meal, or skip it (mark the day as empty).
+list (Indian, Thai, South American, Scandinavian, Italian, Mediterranean, Chinese, Spanish,
+Mexican, Turkish, Greek, Georgian) and trigger meal generation. The planner fills a 7-day
+week view with one dinner suggestion per day (title only). Triggering a full week generation
+always replaces all 7 days, including any previously skipped days. For each suggested meal
+the user can: edit the title inline, regenerate just that meal, swap it with another day's
+meal, or skip it (mark the day as empty).
 
 **Why this priority**: The AI-assisted meal planning feature differentiates the app from a
 static recipe book. It builds on top of P1's recipe infrastructure but is independently useful.
@@ -63,6 +65,10 @@ any recipes.
    **Then** the two meal titles exchange positions.
 4. **Given** a generated week view, **When** the user skips a day,
    **Then** that day is marked as empty/skipped with a clear visual indicator.
+5. **Given** a suggested meal title, **When** the user clicks the title or selects "Rediger tittel",
+   **Then** the title becomes an inline editable field; saving persists the new title.
+6. **Given** a week with some skipped days, **When** the user triggers full week generation,
+   **Then** all 7 days (including previously skipped) receive new meal titles.
 
 ---
 
@@ -138,15 +144,18 @@ after saving.
   navigation from every page.
 - **FR-012**: The meal planner MUST display a 7-day week view with one dinner slot per day.
 - **FR-013**: Users MUST be able to select one or more cuisines from at least: Indian, Thai,
-  South American, Scandinavian, Italian, Mediterranean.
-- **FR-014**: Triggering meal generation MUST populate all non-skipped days with AI-suggested
-  dinner titles based on the selected cuisines.
+  South American, Scandinavian, Italian, Mediterranean, Chinese, Spanish, Mexican, Turkish,
+  Greek, Georgian.
+- **FR-014**: Triggering full week generation MUST populate all 7 days (including previously
+  skipped days) with AI-suggested dinner titles based on the selected cuisines.
 - **FR-015**: For each day in the meal planner, users MUST be able to regenerate that single
   meal independently without affecting other days.
 - **FR-016**: For each day in the meal planner, users MUST be able to swap it with any other
   day's meal.
 - **FR-017**: For each day in the meal planner, users MUST be able to skip that day (mark it
   as empty for that week).
+- **FR-024**: For each suggested meal title in the planner, users MUST be able to edit the
+  title inline (click-to-edit); the updated title MUST persist across page reloads.
 - **FR-018**: For each meal title in the planner, users MUST be able to trigger full recipe
   generation, producing a complete recipe viewable in the recipe detail view.
 - **FR-019**: Users MUST be able to save a planner-generated recipe to the recipe list from
@@ -211,8 +220,9 @@ after saving.
   Supabase Storage.
 - Meal title generation and full recipe generation rely on an external AI service; the
   specific provider is a technical decision for the planning phase.
-- Thumbnail images for AI-generated recipes may use a placeholder or AI-generated image;
-  the specific approach is a technical decision.
+- AI-generated recipes receive an automatically generated thumbnail image (DALL-E 3) created
+  in parallel with the recipe text. Image generation is best-effort; if it fails, the recipe
+  is still usable without a thumbnail.
 - The footer GitHub and LinkedIn links point to the developer's own profiles; specific URLs
   will be provided during implementation.
 - The app is a single-page application navigable between the two main pages without full

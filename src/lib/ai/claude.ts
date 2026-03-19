@@ -100,8 +100,10 @@ Regler:
   const content = message.content[0]
   if (content.type !== 'text') throw new Error('Ugyldig svar fra AI')
 
-  const jsonMatch = content.text.match(/\{[\s\S]*\}/)
-  if (!jsonMatch) throw new Error('Ugyldig JSON fra AI')
+  // Strip markdown code fences if present, then extract JSON object
+  const stripped = content.text.replace(/```(?:json)?\s*/g, '').replace(/```/g, '')
+  const jsonMatch = stripped.match(/\{[\s\S]*\}/)
+  if (!jsonMatch) throw new Error(`Ugyldig JSON fra AI: ${content.text.slice(0, 200)}`)
 
   return JSON.parse(jsonMatch[0]) as GeneratedRecipe
 }

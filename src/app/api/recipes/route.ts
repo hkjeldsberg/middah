@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const body = await request.json()
-  const { name, description, category, protein_source, servings, prep_time, source, ingredientGroups, instructionGroups } = body
+  const { name, description, category, protein_source, servings, prep_time, source, image_path, ingredientGroups, instructionGroups } = body
 
   if (!name || !category || !protein_source || !prep_time) {
     return NextResponse.json({ error: 'Mangler påkrevde felter' }, { status: 400 })
@@ -49,6 +49,7 @@ export async function POST(request: NextRequest) {
       prep_time,
       source: source ?? 'manual',
       sort_order: sortOrder,
+      image_path: image_path ?? null,
     })
     .select()
     .single()

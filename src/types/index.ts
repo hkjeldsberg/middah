@@ -116,6 +116,41 @@ export interface InstructionStepRow {
   text: string
 }
 
+// Meal plan DB row types
+export interface MealPlanRow {
+  id: string
+  week_start: string
+  created_at: string
+  meal_plan_days?: MealPlanDayRow[]
+}
+
+export interface MealPlanDayRow {
+  id: string
+  plan_id: string
+  weekday: number
+  status: DayStatus
+  meal_title: string | null
+  recipe_id: string | null
+}
+
+export function rowToMealPlan(row: MealPlanRow): MealPlan {
+  return {
+    id: row.id,
+    weekStart: row.week_start,
+    createdAt: row.created_at,
+    days: (row.meal_plan_days ?? [])
+      .sort((a, b) => a.weekday - b.weekday)
+      .map((d) => ({
+        id: d.id,
+        planId: d.plan_id,
+        weekday: d.weekday,
+        status: d.status,
+        mealTitle: d.meal_title,
+        recipeId: d.recipe_id,
+      })),
+  }
+}
+
 // Helpers
 export function rowToRecipe(row: RecipeRow): Recipe {
   return {
