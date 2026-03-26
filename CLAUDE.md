@@ -60,6 +60,7 @@ Scripts use POSIX `sh` (not bash) for portability.
 - Supabase PostgreSQL (recipes, meal plans) + Supabase Storage public bucke (001-recipe-meal-planner)
 - TypeScript 5.x / Node.js 20+ + Next.js 15.2.3, React 19, Tailwind CSS, @supabase/supabase-js, next/font/google (Geist) (002-ui-filter-improvements)
 - Supabase PostgreSQL (no schema changes) (002-ui-filter-improvements)
+- N/A (static asset files only) (003-fork-knife-favicon)
 
 ## Recent Changes
 - 001-recipe-meal-planner: Added TypeScript 5.x / Node.js 20+ + Next.js 15, @supabase/supabase-js, @supabase/ssr,
