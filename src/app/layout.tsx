@@ -3,6 +3,7 @@ import { Lora, Varela_Round } from 'next/font/google'
 import './globals.css'
 import NavBar from '@/components/ui/NavBar'
 import Footer from '@/components/ui/Footer'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const lora = Lora({ subsets: ['latin'], variable: '--font-serif' })
 const varelaRound = Varela_Round({ subsets: ['latin'], weight: '400', variable: '--font-sans' })
@@ -25,6 +26,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <SpeedInsights />
       </body>
     </html>
   )
