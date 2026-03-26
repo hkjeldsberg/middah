@@ -4,6 +4,7 @@ import './globals.css'
 import NavBar from '@/components/ui/NavBar'
 import Footer from '@/components/ui/Footer'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Analytics } from '@vercel/analytics/next'
 
 const lora = Lora({ subsets: ['latin'], variable: '--font-serif' })
 const varelaRound = Varela_Round({ subsets: ['latin'], weight: '400', variable: '--font-sans' })
@@ -27,6 +28,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   )
