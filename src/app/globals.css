@@ -17,7 +17,12 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Lora for recipe detail headings (inside <article>) */
+article h1, article h2, article h3, article h4, article h5, article h6 {
+  font-family: var(--font-serif);
 }
 
 /* Ensure minimum touch target sizes per constitution */
@@ -26,4 +31,11 @@ a,
 [role="button"] {
   min-height: 44px;
   min-width: 44px;
+}
+
+/* Ensure button text is always centered */
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

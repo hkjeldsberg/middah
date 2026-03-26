@@ -3,8 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
 
-const CATEGORIES = [
-  { value: '', label: 'Alle kategorier' },
+const ALL_CATEGORIES = [
   { value: 'middag', label: 'Middag' },
   { value: 'forrett', label: 'Forrett' },
   { value: 'dessert', label: 'Dessert' },
@@ -15,8 +14,7 @@ const CATEGORIES = [
   { value: 'suppe', label: 'Suppe' },
 ]
 
-const PROTEINS = [
-  { value: '', label: 'Alle proteiner' },
+const ALL_PROTEINS = [
   { value: 'kylling', label: 'Kylling' },
   { value: 'storfe', label: 'Storfe' },
   { value: 'svin', label: 'Svin' },
@@ -27,7 +25,12 @@ const PROTEINS = [
   { value: 'annet', label: 'Annet' },
 ]
 
-export default function RecipeFilters() {
+interface RecipeFiltersProps {
+  availableCategories: string[]
+  availableProteins: string[]
+}
+
+export default function RecipeFilters({ availableCategories, availableProteins }: RecipeFiltersProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const category = searchParams.get('category') ?? ''
@@ -46,15 +49,19 @@ export default function RecipeFilters() {
     [router, searchParams]
   )
 
+  const visibleCategories = ALL_CATEGORIES.filter((c) => availableCategories.includes(c.value))
+  const visibleProteins = ALL_PROTEINS.filter((p) => availableProteins.includes(p.value))
+
   return (
-    <div className="flex flex-wrap gap-3 mb-6">
+    <div className="flex flex-wrap gap-3">
       <select
         value={category}
         onChange={(e) => updateFilter('category', e.target.value)}
         className="h-11 px-3 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gray-900"
         aria-label="Filtrer etter kategori"
       >
-        {CATEGORIES.map((c) => (
+        <option value="">Alle kategorier</option>
+        {visibleCategories.map((c) => (
           <option key={c.value} value={c.value}>
             {c.label}
           </option>
@@ -67,7 +74,8 @@ export default function RecipeFilters() {
         className="h-11 px-3 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gray-900"
         aria-label="Filtrer etter proteinkilde"
       >
-        {PROTEINS.map((p) => (
+        <option value="">Alle proteiner</option>
+        {visibleProteins.map((p) => (
           <option key={p.value} value={p.value}>
             {p.label}
           </option>
