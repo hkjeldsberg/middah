@@ -31,7 +31,7 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
         />
       </div>
       <div className="p-3">
-        <h3 className="font-semibold text-gray-900 leading-tight line-clamp-2 mb-1 group-hover:text-gray-600 transition-colors">
+        <h3 className="font-serif font-semibold text-gray-900 leading-tight line-clamp-2 mb-1 group-hover:text-gray-600 transition-colors">
           {recipe.name}
         </h3>
         <p className="text-sm text-gray-500 flex items-center gap-1">

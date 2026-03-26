@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useId } from 'react'
 import {
   DndContext,
   closestCenter,
@@ -41,6 +41,7 @@ interface RecipeGridProps {
 }
 
 export default function RecipeGrid({ initialRecipes }: RecipeGridProps) {
+  const dndId = useId()
   const [recipes, setRecipes] = useState(initialRecipes)
 
   useEffect(() => {
@@ -82,7 +83,7 @@ export default function RecipeGrid({ initialRecipes }: RecipeGridProps) {
   )
 
   return (
-    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+    <DndContext id={dndId} sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <SortableContext items={recipes.map((r) => r.id)} strategy={rectSortingStrategy}>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {recipes.map((recipe) => (
