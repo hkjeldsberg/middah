@@ -5,6 +5,7 @@ import type { Recipe } from '@/types'
 import { buildIngredientMap, resolveTokens, scaleAmount } from '@/lib/scaling'
 import PortionControl from './PortionControl'
 import WakeLockToggle from './WakeLockToggle'
+import RecipeSteps from './RecipeSteps'
 import Link from 'next/link'
 
 interface RecipeDetailProps {
@@ -120,22 +121,15 @@ export default function RecipeDetail({
         {/* Instructions */}
         <section>
           <h2 className="text-lg font-semibold text-gray-900 mb-3">Fremgangsmåte</h2>
-          {recipe.instructionGroups?.map((group) => (
-            <div key={group.id} className="mb-4">
-              {recipe.instructionGroups!.length > 1 && (
-                <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">
-                  {group.name}
-                </h3>
-              )}
-              <ol className="space-y-2 list-decimal list-inside">
-                {group.steps.map((step) => (
-                  <li key={step.id} className="text-sm text-gray-800 leading-relaxed">
-                    {resolveTokens(step.text, ingredientMap, recipe.servings, servings)}
-                  </li>
-                ))}
-              </ol>
-            </div>
-          ))}
+          {recipe.instructionGroups && (
+            <RecipeSteps
+              groups={recipe.instructionGroups}
+              recipeId={recipe.id}
+              renderStep={(text) =>
+                resolveTokens(text, ingredientMap, recipe.servings, servings)
+              }
+            />
+          )}
         </section>
       </div>
     </article>
