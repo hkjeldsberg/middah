@@ -11,10 +11,12 @@ interface UseWakeLockReturn {
 export function useWakeLock(): UseWakeLockReturn {
   const wakeLockRef = useRef<WakeLockSentinel | null>(null)
   const [isActive, setIsActive] = useState(false)
+  const [isSupported, setIsSupported] = useState(false)
   const enabledRef = useRef(false)
 
-  const isSupported =
-    typeof navigator !== 'undefined' && 'wakeLock' in navigator
+  useEffect(() => {
+    setIsSupported(typeof navigator !== 'undefined' && 'wakeLock' in navigator)
+  }, [])
 
   const requestLock = useCallback(async () => {
     if (!isSupported || !enabledRef.current) return

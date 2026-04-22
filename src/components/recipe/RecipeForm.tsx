@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import { normalizeIngredientKey } from '@/lib/scaling'
 
 const CATEGORIES = [
   { value: 'middag', label: 'Middag' },
@@ -113,7 +114,7 @@ export default function RecipeForm({
     )
     // Auto-fill ingredientKey from displayName
     if (field === 'displayName') {
-      const key = value.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '')
+      const key = normalizeIngredientKey(value)
       updated[gi].ingredients[ii].ingredientKey = key
     }
     setIngredientGroups(updated)

@@ -1,5 +1,13 @@
 import type { IngredientGroup } from '@/types'
 
+export function normalizeIngredientKey(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/æ/g, 'ae').replace(/ø/g, 'oe').replace(/å/g, 'aa')
+    .replace(/\s+/g, '_')
+    .replace(/[^a-z0-9_]/g, '')
+}
+
 export function scaleAmount(
   base: number,
   defaultServings: number,
@@ -25,11 +33,9 @@ export function buildIngredientMap(
   const map: Record<string, IngredientMapEntry> = {}
   for (const group of ingredientGroups) {
     for (const ing of group.ingredients) {
-      map[ing.ingredientKey] = {
-        amount: ing.amount,
-        unit: ing.unit,
-        displayName: ing.displayName,
-      }
+      const entry = { amount: ing.amount, unit: ing.unit, displayName: ing.displayName }
+      map[normalizeIngredientKey(ing.ingredientKey)] = entry
+      map[normalizeIngredientKey(ing.displayName)] = entry
     }
   }
   return map
@@ -41,8 +47,8 @@ export function resolveTokens(
   defaultServings: number,
   currentServings: number
 ): string {
-  return text.replace(/\{(\w+)\}/g, (match, key) => {
-    const ing = ingredientMap[key]
+  return text.replace(/\{([^}]+)\}/g, (match, key) => {
+    const ing = ingredientMap[normalizeIngredientKey(key)]
     if (!ing) return match
     const scaled = scaleAmount(ing.amount, defaultServings, currentServings)
     return `${formatAmount(scaled)} ${ing.unit} ${ing.displayName}`

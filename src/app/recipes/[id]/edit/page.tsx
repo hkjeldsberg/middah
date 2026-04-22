@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import RecipeForm from '@/components/recipe/RecipeForm'
 import type { RecipeFormData } from '@/components/recipe/RecipeForm'
-import type { Recipe } from '@/types'
+import type { Recipe, RecipeRow } from '@/types'
+import { rowToRecipe } from '@/types'
 
 export default function EditRecipePage() {
   const router = useRouter()
@@ -18,8 +19,8 @@ export default function EditRecipePage() {
   useEffect(() => {
     fetch(`/api/recipes/${id}`)
       .then(res => res.json())
-      .then(data => {
-        setRecipe(data)
+      .then((data: RecipeRow) => {
+        setRecipe(rowToRecipe(data))
         setLoading(false)
       })
   }, [id])
