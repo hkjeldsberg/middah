@@ -1,4 +1,6 @@
 import { Suspense } from 'react'
+
+export const dynamic = 'force-dynamic'
 import { supabaseServer } from '@/lib/supabase/server'
 import { rowToRecipe } from '@/types'
 import type { RecipeRow } from '@/types'
