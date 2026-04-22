@@ -50,7 +50,7 @@ export default function EditRecipePage() {
 
       if (data.imageFile) {
         const formData = new FormData()
-        formData.append('image', data.imageFile)
+        formData.append('file', data.imageFile)
         await fetch(`/api/recipes/${id}/image`, {
           method: 'POST',
           body: formData,

@@ -39,7 +39,7 @@ export default function NewRecipePage() {
       // Upload image if provided
       if (data.imageFile) {
         const formData = new FormData()
-        formData.append('image', data.imageFile)
+        formData.append('file', data.imageFile)
         await fetch(`/api/recipes/${recipe.id}/image`, {
           method: 'POST',
           body: formData,
