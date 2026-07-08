@@ -1,7 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import type { Recipe } from '@/types'
 import RecipeFilters from './RecipeFilters'
@@ -16,9 +15,15 @@ interface RecipeListProps {
 }
 
 export default function RecipeList({ recipes }: RecipeListProps) {
-  const searchParams = useSearchParams()
-  const category = searchParams.get('category') ?? ''
-  const proteinSource = searchParams.get('proteinSource') ?? ''
+  const [category, setCategory] = useState('')
+  const [proteinSource, setProteinSource] = useState('')
+  const [q, setQ] = useState('')
+
+  const resetFilters = () => {
+    setCategory('')
+    setProteinSource('')
+    setQ('')
+  }
 
   const availableCategories = useMemo(
     () => CATEGORIES.filter((c) => recipes.some((r) => r.category === c)),
@@ -34,9 +39,10 @@ export default function RecipeList({ recipes }: RecipeListProps) {
     return recipes.filter((r) => {
       if (category && r.category !== category) return false
       if (proteinSource && r.proteinSource !== proteinSource) return false
+      if (q && !r.name.toLowerCase().includes(q.toLowerCase())) return false
       return true
     })
-  }, [recipes, category, proteinSource])
+  }, [recipes, category, proteinSource, q])
 
   if (recipes.length === 0) {
     return (
@@ -54,6 +60,13 @@ export default function RecipeList({ recipes }: RecipeListProps) {
         <RecipeFilters
           availableCategories={availableCategories}
           availableProteins={availableProteins}
+          searchQuery={q}
+          onSearchChange={setQ}
+          category={category}
+          onCategoryChange={setCategory}
+          proteinSource={proteinSource}
+          onProteinSourceChange={setProteinSource}
+          onReset={resetFilters}
         />
         <Link
           href="/recipes/new"
@@ -66,7 +79,10 @@ export default function RecipeList({ recipes }: RecipeListProps) {
         <EmptyState
           heading="Ingen oppskrifter funnet"
           description="Prøv å endre filtrene for å se flere oppskrifter."
-          action={{ label: 'Nullstill filter', href: '/' }}
+          action={{
+            label: 'Nullstill filter',
+            onClick: resetFilters,
+          }}
         />
       ) : (
         <RecipeGrid initialRecipes={filteredRecipes} />

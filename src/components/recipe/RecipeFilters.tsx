@@ -1,8 +1,5 @@
 'use client'
 
-import { useRouter, useSearchParams } from 'next/navigation'
-import { useCallback } from 'react'
-
 const ALL_CATEGORIES = [
   { value: 'middag', label: 'Middag' },
   { value: 'forrett', label: 'Forrett' },
@@ -28,36 +25,49 @@ const ALL_PROTEINS = [
 interface RecipeFiltersProps {
   availableCategories: string[]
   availableProteins: string[]
+  searchQuery: string
+  onSearchChange: (value: string) => void
+  category: string
+  onCategoryChange: (value: string) => void
+  proteinSource: string
+  onProteinSourceChange: (value: string) => void
+  onReset: () => void
 }
 
-export default function RecipeFilters({ availableCategories, availableProteins }: RecipeFiltersProps) {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const category = searchParams.get('category') ?? ''
-  const proteinSource = searchParams.get('proteinSource') ?? ''
-
-  const updateFilter = useCallback(
-    (key: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      if (value) {
-        params.set(key, value)
-      } else {
-        params.delete(key)
-      }
-      router.push(`/?${params.toString()}`)
-    },
-    [router, searchParams]
-  )
-
+export default function RecipeFilters({
+  availableCategories,
+  availableProteins,
+  searchQuery,
+  onSearchChange,
+  category,
+  onCategoryChange,
+  proteinSource,
+  onProteinSourceChange,
+  onReset,
+}: RecipeFiltersProps) {
   const visibleCategories = ALL_CATEGORIES.filter((c) => availableCategories.includes(c.value))
   const visibleProteins = ALL_PROTEINS.filter((p) => availableProteins.includes(p.value))
 
   return (
     <div className="flex flex-wrap gap-3">
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={(e) => onSearchChange(e.target.value)}
+        placeholder="Søk etter oppskrift…"
+        className="h-11 px-3 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gray-900"
+        aria-label="Søk etter oppskrift"
+      />
+
       <select
         value={category}
-        onChange={(e) => updateFilter('category', e.target.value)}
-        className="h-11 px-3 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gray-900"
+        onChange={(e) => onCategoryChange(e.target.value)}
+        className="h-11 pl-3 pr-10 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gray-900 appearance-none bg-no-repeat"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E\")",
+          backgroundPosition: 'right 0.75rem center',
+        }}
         aria-label="Filtrer etter kategori"
       >
         <option value="">Alle kategorier</option>
@@ -70,8 +80,13 @@ export default function RecipeFilters({ availableCategories, availableProteins }
 
       <select
         value={proteinSource}
-        onChange={(e) => updateFilter('proteinSource', e.target.value)}
-        className="h-11 px-3 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gray-900"
+        onChange={(e) => onProteinSourceChange(e.target.value)}
+        className="h-11 pl-3 pr-10 rounded-lg border border-gray-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-gray-900 appearance-none bg-no-repeat"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E\")",
+          backgroundPosition: 'right 0.75rem center',
+        }}
         aria-label="Filtrer etter proteinkilde"
       >
         <option value="">Alle proteiner</option>
@@ -82,9 +97,9 @@ export default function RecipeFilters({ availableCategories, availableProteins }
         ))}
       </select>
 
-      {(category || proteinSource) && (
+      {(category || proteinSource || searchQuery) && (
         <button
-          onClick={() => router.push('/')}
+          onClick={onReset}
           className="h-11 px-3 text-sm text-gray-500 hover:text-gray-900 transition-colors"
         >
           Nullstill filter

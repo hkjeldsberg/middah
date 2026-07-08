@@ -65,7 +65,7 @@ export default function RecipeDetail({
             <>
               <Link
                 href={`/recipes/${recipe.id}/edit`}
-                className="px-4 py-2 border border-gray-300 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors"
+                className="flex flex-col justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors"
               >
                 Rediger
               </Link>
