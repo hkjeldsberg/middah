@@ -3,9 +3,19 @@
 import { useEffect, useState } from 'react'
 
 /** Roughly tracks the real phases: yt-dlp fetches the reel, then Claude reads it. */
-const DEFAULT_STAGES = [
+export const REEL_STAGES = [
   'Åpner reelen…',
   'Leser beskrivelsen…',
+  'Fisker ut ingrediensene…',
+  'Regner om mengdene…',
+  'Oversetter til norsk…',
+  'Setter sammen stegene…',
+  'Pynter på oppskriften…',
+]
+
+/** No reel to fetch when the text is pasted straight in. */
+export const TEXT_STAGES = [
+  'Leser teksten…',
   'Fisker ut ingrediensene…',
   'Regner om mengdene…',
   'Oversetter til norsk…',
@@ -20,7 +30,7 @@ interface CookingLoaderProps {
 }
 
 export default function CookingLoader({
-  stages = DEFAULT_STAGES,
+  stages = REEL_STAGES,
   interval = 4000,
 }: CookingLoaderProps) {
   const [stage, setStage] = useState(0)

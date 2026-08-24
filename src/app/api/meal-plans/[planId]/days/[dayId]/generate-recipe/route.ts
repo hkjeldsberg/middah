@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabaseServer } from '@/lib/supabase/server'
 import { generateRecipe } from '@/lib/ai/claude'
 
-// Extend timeout for the recipe generation call (requires Vercel Pro for > 10s)
+// Extend timeout for the recipe generation call. Vercel's max duration is now
+// 300s on Hobby too, so this no longer needs a Pro plan.
 export const maxDuration = 60
 
 type Params = Promise<{ planId: string; dayId: string }>

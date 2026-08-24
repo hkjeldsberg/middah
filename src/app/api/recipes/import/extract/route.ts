@@ -6,25 +6,32 @@ import { extractRecipeFromText, NotARecipeError } from '@/lib/ai/claude'
 export const maxDuration = 120
 
 export async function POST(request: NextRequest) {
-  const { url, instructions } = (await request.json()) as {
+  const { url, text, instructions } = (await request.json()) as {
     url?: string
+    text?: string
     instructions?: string
   }
 
-  if (!url?.trim()) {
-    return NextResponse.json({ error: 'Mangler lenke' }, { status: 400 })
-  }
+  // Pasted text wins when both are present — it needs no yt-dlp, so it works
+  // in environments where the binary is unavailable, and it covers recipes that
+  // live in a pinned comment rather than the reel description.
+  let sourceText = text?.trim() ?? ''
 
-  let sourceText: string
-  try {
-    const meta = await fetchReelMetadata(url)
-    sourceText = meta.description
-  } catch (err) {
-    if (err instanceof ReelError) {
-      return NextResponse.json({ error: err.message }, { status: 400 })
+  if (!sourceText) {
+    if (!url?.trim()) {
+      return NextResponse.json({ error: 'Lim inn en lenke eller en tekst' }, { status: 400 })
     }
-    console.error('[import/extract] uventet feil fra yt-dlp:', err)
-    return NextResponse.json({ error: 'Klarte ikke å hente reelen.' }, { status: 502 })
+
+    try {
+      const meta = await fetchReelMetadata(url)
+      sourceText = meta.description
+    } catch (err) {
+      if (err instanceof ReelError) {
+        return NextResponse.json({ error: err.message }, { status: 400 })
+      }
+      console.error('[import/extract] uventet feil fra yt-dlp:', err)
+      return NextResponse.json({ error: 'Klarte ikke å hente reelen.' }, { status: 502 })
+    }
   }
 
   try {

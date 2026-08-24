@@ -8,15 +8,15 @@ This is a **Speckit v0.3.1** spec-driven development project. The repository use
 
 ## App Summary (Middah)
 
-Norwegian-language ("bokmål") recipe + weekly meal-planner web app. Next.js 15 App Router, React 19, Tailwind, Supabase (Postgres + Storage), Claude (`@anthropic-ai/sdk`) for text generation, OpenAI (`openai` pkg) for image generation. No auth — single-tenant/personal use.
+Norwegian-language ("bokmål") recipe + weekly meal-planner web app. Next.js 15 App Router, React 19, Tailwind, Supabase (Postgres + Storage), Claude (`@anthropic-ai/sdk`) for text generation. Recipe images are user-uploaded — there is no AI image generation (the OpenAI key is retired, and Gemini's image models have no free tier). No auth — single-tenant/personal use.
 
 **Two main areas:**
 - `/` — recipe library (`src/app/page.tsx`, `RecipeList`/`RecipeGrid`/`RecipeCard`/`RecipeFilters`). Recipes have ingredient groups + instruction groups (each with ordered items), servings-based scaling (`src/lib/scaling.ts`), drag-drop reorder (`@dnd-kit`), and step-by-step cook mode with checkboxes + wake lock (`RecipeSteps`, `useWakeLock`).
-- `/meal-planner` — generates a 7-day dinner plan. Pick cuisines → Claude Haiku suggests meal titles per day (`generateMealTitles`) → per-day actions: skip/swap/edit/regenerate/link-to-existing-recipe/generate-full-recipe (Claude Sonnet writes the recipe JSON + OpenAI generates a dish photo, in parallel, `src/lib/ai/claude.ts` + `src/lib/ai/image.ts`).
+- `/meal-planner` — generates a 7-day dinner plan. Pick cuisines → Claude Haiku suggests meal titles per day (`generateMealTitles`) → per-day actions: skip/swap/edit/regenerate/link-to-existing-recipe/generate-full-recipe (Claude writes the recipe JSON, `src/lib/ai/claude.ts`; the user optionally attaches a photo on the preview screen).
 
 **Data model** (`src/types/index.ts`): `Recipe` → `IngredientGroup[]` → `Ingredient[]`, and `Recipe` → `InstructionGroup[]` → `InstructionStep[]`. Instructions reference ingredients via `{ingredient_key}` tokens, resolved/scaled at render time (`resolveTokens` in scaling.ts, handles Norwegian æøå normalization). `MealPlan` → `MealPlanDay[]` (weekday 0-6, status: empty/suggested/skipped, optional `recipeId` link).
 
-**API routes** (`src/app/api/`): CRUD for recipes (incl. image upload to Supabase Storage bucket `recipe-images`, drag reorder endpoint), and meal-plan endpoints for fetching/creating the current ISO week's plan, bulk-generating titles, per-day PATCH actions, and AI recipe+image generation (`maxDuration = 60`, needs Vercel Pro).
+**API routes** (`src/app/api/`): CRUD for recipes (incl. image upload to Supabase Storage bucket `recipe-images`, drag reorder endpoint), and meal-plan endpoints for fetching/creating the current ISO week's plan, bulk-generating titles, per-day PATCH actions, and AI recipe generation (`maxDuration = 60`). There is also a reel-import endpoint (`api/recipes/import/extract`) that turns an Instagram reel URL — via yt-dlp, so local dev only — or pasted text into a recipe (`/recipes/import`).
 
 **Supabase**: `supabaseServer` client (`src/lib/supabase/server.ts`) used directly in route handlers with the service role — no RLS-aware client-side calls. snake_case DB rows are converted to camelCase domain types via `rowToRecipe`/`rowToMealPlan` helpers in `src/types/index.ts`.
 
