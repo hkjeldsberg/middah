@@ -69,8 +69,14 @@ export default function RecipeList({ recipes }: RecipeListProps) {
           onReset={resetFilters}
         />
         <Link
+          href="/recipes/import"
+          className="ml-auto shrink-0 flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors"
+        >
+          Fra Instagram
+        </Link>
+        <Link
           href="/recipes/new"
-          className="ml-auto shrink-0 flex items-center justify-center px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors"
+          className="shrink-0 flex items-center justify-center px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors"
         >
           + Ny oppskrift
         </Link>

@@ -1,0 +1,66 @@
+name: Kjøttboller i tomatsaus
+
+description: Klassiske, saftige kjøttboller i en fyldig tomatsaus med hvitløk og løk. Serveres med pasta, frisk basilikum og gjerne litt godt brød ved siden av.
+
+category: middag
+protein: storfe
+servings: 4
+prepTime: 45 min
+image: kjottboller.jpeg
+
+[ingredienser]
+
+## Kjøttboller
+
+500 g kjøttdeig
+1 stk egg
+1 stk løk
+1 ss maizena
+1 ts salt
+½ ts pepper
+1 ts tørket oregano
+2 ss olivenolje
+
+## Tomatsaus
+
+2 bokser hakkede tomater
+3 ss tomatpuré
+1 stk løk
+3 fedd hvitløk
+1 ss olivenolje
+1 ts tørket oregano
+salt og pepper etter smak
+
+## Tilbehør
+
+300 g penne
+1 bunt frisk basilikum
+1 stk baguette
+
+[fremgangsmåte]
+
+## Kjøttboller
+
+Bland {kjøttdeig}, {egg}, {løk}, {maizena}, {salt}, {pepper} og {tørket oregano} godt sammen i en bolle til en jevn farse.
+
+Form farsen til små kjøttboller, omtrent på størrelse med en valnøtt.
+
+Varm {olivenolje} i en stor stekepanne på middels høy varme. Stek kjøttbollene i omganger dersom pannen blir trang, slik at de får en god stekeskorpe på alle sider. Sett dem til side når de er gylne.
+
+## Tomatsaus
+
+Finhakk {løk} og {hvitløk}. Varm {olivenolje} i en gryte eller dyp panne og fres løken i 3–4 minutter til den blir blank og myk.
+
+Tilsett {tomatpuré} og {tørket oregano}, og la det steke sammen i 1–2 minutter. Dette gir tomatpureen en dypere og rundere smak.
+
+Hell i {hakkede tomater} og smak til med salt og pepper. La sausen småkoke uten lokk i minst 20 minutter, gjerne lenger, slik at den tykner og får mer smak.
+
+Legg kjøttbollene tilbake i tomatsausen og la dem småkoke i 8–10 minutter, til de er gjennomstekte og har trukket til seg smak fra sausen.
+
+## Pasta og servering
+
+Kok {penne} etter anvisningen på pakken til den er al dente. Spar gjerne litt av pastavannet før du heller av vannet.
+
+Vend pastaen inn i litt av tomatsausen, eller server den med kjøttbollene og sausen over.
+
+Topp med {frisk basilikum} og server gjerne med {baguette} eller annet godt brød ved siden av.

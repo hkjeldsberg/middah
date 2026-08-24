@@ -1,0 +1,40 @@
+name: Laksewraps
+
+description: Saftige laksewraps med BBQ-stekt laks og paprika, kremet aioli, frisk ruccola og smeltet mozzarella. En enkel og smakfull middag som er rask å lage.
+category: middag
+protein: fisk
+servings: 2
+prepTime: 25 min
+image: laksewraps.jpeg
+
+[ingredienser]
+
+## Laks og grønnsaker
+
+300 g laksefilet
+1 stk rød paprika
+2 ss BBQ-saus
+1 ss olivenolje
+salt og pepper etter smak
+
+## Wraps
+
+2 stk tortillawraps
+3 ss aioli
+2 never ruccola
+100 g revet mozzarella
+
+[fremgangsmåte]
+
+## Laks og paprika
+
+Skjær {laksefilet} i terninger og {rød paprika} i små strimler.
+Varm {olivenolje} i en stekepanne på middels høy varme. Stek {laksefilet} og {rød paprika} i 5–7 minutter, til laksen er gjennomstekt og paprikaen begynner å bli myk.
+Tilsett {BBQ-saus} mot slutten av steketiden og vend alt godt sammen. Smak til med salt og pepper.
+
+## Montering
+
+Varm {tortillawraps} raskt i en tørr panne eller mikrobølgeovn.
+Smør {aioli} utover wrapene og legg på {ruccola}.
+Fordel den stekte laks- og paprikablandingen over, og topp med {revet mozzarella}.
+Rull wrapene tett sammen og server umiddelbart.

@@ -107,3 +107,100 @@ Regler:
 
   return JSON.parse(jsonMatch[0]) as GeneratedRecipe
 }
+
+/**
+ * Claude Opus 5 runs adaptive thinking by default, so the first content block is
+ * usually a thinking block — always look up the text block explicitly.
+ */
+function firstText(message: Anthropic.Message): string {
+  const block = message.content.find((b) => b.type === 'text')
+  if (!block || block.type !== 'text') throw new Error('Ugyldig svar fra AI')
+  return block.text
+}
+
+function parseRecipeJson(text: string): GeneratedRecipe {
+  const stripped = text.replace(/```(?:json)?\s*/g, '').replace(/```/g, '')
+  const jsonMatch = stripped.match(/\{[\s\S]*\}/)
+  if (!jsonMatch) throw new Error(`Ugyldig JSON fra AI: ${text.slice(0, 200)}`)
+
+  const parsed = JSON.parse(jsonMatch[0]) as GeneratedRecipe & { error?: string }
+  if (parsed.error) throw new NotARecipeError(parsed.error)
+  return parsed
+}
+
+/** Thrown when the source text does not contain a recipe. */
+export class NotARecipeError extends Error {}
+
+/**
+ * Turns free-form text (an Instagram reel description, a pasted caption, …) into
+ * a recipe. `instructions` lets the user steer the result — scale it, swap an
+ * ingredient, make it vegetarian, and so on.
+ */
+export async function extractRecipeFromText(
+  sourceText: string,
+  instructions?: string
+): Promise<GeneratedRecipe> {
+  const customBlock = instructions?.trim()
+    ? `\n\nEGNE INSTRUKSJONER FRA BRUKEREN (disse har forrang over kildeteksten):\n"""\n${instructions.trim()}\n"""`
+    : ''
+
+  const message = await anthropic.messages.create({
+    model: 'claude-opus-5',
+    max_tokens: 8192,
+    messages: [
+      {
+        role: 'user',
+        content: `Du får rå tekst fra en Instagram-post eller reel. Trekk ut oppskriften og skriv den om til norsk (bokmål).
+
+KILDETEKST:
+"""
+${sourceText}
+"""${customBlock}
+
+Returner KUN et JSON-objekt med dette formatet:
+{
+  "name": "Oppskriftsnavn",
+  "description": "Kort beskrivelse av retten",
+  "servings": 4,
+  "prep_time": "30 min",
+  "category": "middag",
+  "protein_source": "kylling",
+  "ingredient_groups": [
+    {
+      "name": "Saus",
+      "ingredients": [
+        {"ingredient_key": "soyasaus", "display_name": "Soyasaus", "amount": 3, "unit": "ss"}
+      ]
+    }
+  ],
+  "instruction_groups": [
+    {
+      "name": "Saus",
+      "steps": [
+        "Bland {soyasaus} med de andre ingrediensene."
+      ]
+    }
+  ]
+}
+
+Regler:
+- Oversett til norsk (bokmål) dersom kilden er på et annet språk.
+- Ignorer støy: hashtags, emojier, «følg meg», lenker, kommentarer om videoen.
+- Behold mengder slik de står i kilden. Regn om til metriske enheter (g, dl, ss, ts, stk).
+- Mangler en mengde, anslå en rimelig verdi framfor å hoppe over ingrediensen.
+- Bruk amount 0 for ingredienser uten mengde, som «salt og pepper etter smak».
+- ingredient_key: kun små bokstaver a-å og understrek, ingen mellomrom eller tegnsetting.
+- Hver {token} i en instruksjon MÅ matche en ingredient_key nøyaktig. Ingen tokens for
+  ingredienser som ikke står i ingredient_groups.
+- Del opp i grupper (f.eks. «Marinade», «Tilbehør») kun når kilden faktisk har det.
+  Ellers én gruppe med tom streng som navn.
+- category: én av: middag, forrett, dessert, frokost, lunsj, bakst, snacks, suppe
+- protein_source: én av: kylling, storfe, svin, fisk, vegetar, vegan, lam, annet
+- Finner du ingen oppskrift i teksten, returner {"error": "kort forklaring på norsk"}.
+- Kun JSON, ingen annen tekst.`,
+      },
+    ],
+  })
+
+  return parseRecipeJson(firstText(message))
+}

@@ -72,8 +72,8 @@ export default function WeekView({ plan, cuisines, onPlanUpdate }: WeekViewProps
         setError(data.error ?? 'Noe gikk galt')
         return
       }
-      const { recipe, imagePath } = await res.json() as { recipe: GeneratedRecipe; imagePath: string | null }
-      sessionStorage.setItem('pendingRecipe', JSON.stringify({ recipe, imagePath, planId: plan.id, dayId: day.id }))
+      const { recipe } = await res.json() as { recipe: GeneratedRecipe }
+      sessionStorage.setItem('pendingRecipe', JSON.stringify({ recipe, planId: plan.id, dayId: day.id }))
       router.push('/recipes/preview')
     } catch {
       setError('Nettverksfeil. Prøv igjen.')

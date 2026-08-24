@@ -1,0 +1,34 @@
+name: Kjøttboller i tomatsaus
+description: Klassiske kjøttboller i fyldig tomatsaus. Serveres med pasta eller potetmos.
+category: middag
+protein: storfe
+servings: 4
+prepTime: 45 min
+image: kjottboller.jpg
+
+[ingredienser]
+## Kjøttboller
+400 g kjøttdeig
+1 stk egg
+2 ss brødsmuler
+1 ts salt
+½ ts pepper
+
+## Tomatsaus
+1 boks hakkede tomater
+2 fedd hvitløk
+1 stk løk
+1 ss olivenolje
+salt og pepper etter smak
+
+[fremgangsmåte]
+## Kjøttboller
+Bland {kjøttdeig}, {egg} og {brødsmuler} i en bolle. Smak til med {salt} og {pepper}.
+Form til boller på størrelse med en valnøtt.
+Stek bollene i panne til de er gyllne på alle sider. Sett til side.
+
+## Tomatsaus
+Finhakk {løk} og {hvitløk}. Fres i {olivenolje} til løken er blank.
+Tilsett {hakkede tomater} og la småkoke i 20 minutter.
+Legg kjøttbollene i sausen og la dem trekke i 10 minutter før servering.
+

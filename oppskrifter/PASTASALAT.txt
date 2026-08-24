@@ -1,0 +1,51 @@
+name: Pastasalat
+
+description: Frisk og mettende pastasalat med saftig kylling, sprø grønnsaker, kremet avokado og salt fetaost. Enkel å lage og passer godt som både lunsj og middag.
+
+category: middag
+protein: kylling
+servings: 4
+prepTime: 30 min
+image: pastasalat.jpeg
+
+[ingredienser]
+
+## Pastasalat
+
+300 g pasta
+400 g kyllingfilet
+1 stk hjertesalat
+200 g cherrytomater
+1 stk avokado
+½ stk agurk
+1 stk paprika
+150 g fetaost
+
+## Dressing
+
+3 ss olivenolje
+1 stk sitron
+½ ts salt
+¼ ts pepper
+
+[fremgangsmåte]
+
+## Kylling
+
+Skjær {kyllingfilet} i biter og stek i panne til den er gjennomstekt og gyllen. Krydre med paprikapulver, oregano, {salt} og {pepper}. Sett til side og la kyllingen avkjøles litt.
+
+## Pasta
+
+Kok {pasta} etter anvisningen på pakken. Hell av vannet og skyll gjerne pastaen raskt i kaldt vann slik at den avkjøles.
+
+## Grønnsaker
+
+Kutt {hjertesalat}, {cherrytomater}, {avokado}, {agurk} og {paprika} i passende biter. Skjær {fetaost} i terninger.
+
+## Bland salaten
+
+Ha {pasta}, {kyllingfilet} og alle grønnsakene i en stor bolle. Tilsett {fetaost} og bland forsiktig sammen.
+
+## Dressing
+
+Press saften fra {sitron} over salaten og drypp over {olivenolje}. Krydre med {salt} og {pepper}, og vend alt godt sammen før servering.

@@ -1,0 +1,70 @@
+name: Greske grillspyd
+
+description: Saftige grillspyd med mørt storfekjøtt og grillede grønnsaker, servert med sprø ovnspoteter, hjemmelaget tzatziki og varmt pitabrød. En smakfull greskinspirert middag som passer perfekt til grillen eller stekepannen.
+category: middag
+protein: storfe
+servings: 4
+prepTime: 45 min
+image: gresk-grillspyd.jpeg
+
+[ingredienser]
+
+## Grillspyd
+
+600 g storfekjøtt i terninger
+1 stk rød paprika
+1 stk squash
+200 g sjampinjong
+1 stk rødløk
+2 ss olivenolje
+4 stk grillspyd
+salt og pepper etter smak
+
+## Tzatziki
+
+1 stk agurk
+2 fedd hvitløk
+3 dl gresk yoghurt
+½ ts salt
+½ ts pepper
+
+## Ovnspoteter
+
+600 g poteter
+2 ss olivenolje
+1 ts paprikapulver
+1 ts tørket oregano
+1 ss maisenna
+salt og pepper etter smak
+
+## Servering
+
+4 stk pitabrød eller libabrød
+
+[fremgangsmåte]
+
+## Ovnspoteter
+
+Skrell eller vask {poteter} og del dem i jevne båter eller terninger.
+Kok {poteter} i lettsaltet vann i ca. 10 minutter. Hell av vannet og la potetene dampe tørre.
+Vend {poteter} med {olivenolje}, {paprikapulver}, {tørket oregano} og {maisenna}. Krydre med salt og pepper.
+Fordel potetene på et stekebrett og stek ved 220°C i ca. 20 minutter, til de er gylne og sprø.
+
+## Tzatziki
+
+Rasp {agurk} grovt og press ut så mye væske som mulig.
+Finhakk {hvitløk} og bland med {gresk yoghurt} og {agurk}.
+Smak til med salt og pepper, og sett tzatzikien kjølig frem til servering.
+
+## Grillspyd
+
+Del {rød paprika}, {squash}, {sjampinjong} og {rødløk} i passende biter.
+Stek {sjampinjong} først i litt {olivenolje} på høy varme til den får god stekeskorpe.
+Tilsett resten av grønnsakene og stek videre i noen minutter til de er gylne, men fortsatt har litt tyggemotstand. Krydre med salt og pepper.
+Tre {storfekjøtt i terninger} og grønnsakene på grillspyd.
+Stek spydene på høy varme i panne eller på grill til kjøttet har fått god stekeskorpe og ønsket stekegrad.
+
+## Servering
+
+Varm {pitabrød eller libabrød} raskt i panne, ovn eller på grill.
+Server grillspydene med ovnspoteter, tzatziki og varmt brød.

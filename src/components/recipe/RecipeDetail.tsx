@@ -107,7 +107,7 @@ export default function RecipeDetail({
                   return (
                     <li key={ing.id} className="flex gap-2 text-sm text-gray-800">
                       <span className="font-medium tabular-nums w-16 shrink-0 text-right">
-                        {formatted} {ing.unit}
+                        {formatted === 0 ? '' : formatted} {ing.unit}
                       </span>
                       <span>{ing.displayName}</span>
                     </li>
