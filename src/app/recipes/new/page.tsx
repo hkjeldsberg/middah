@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import RecipeForm from '@/components/recipe/RecipeForm'
+import { uploadRecipeImage } from '@/lib/recipeImage'
 import type { RecipeFormData } from '@/components/recipe/RecipeForm'
 
 export default function NewRecipePage() {
@@ -36,14 +37,9 @@ export default function NewRecipePage() {
 
       const recipe = await res.json()
 
-      // Upload image if provided
       if (data.imageFile) {
-        const formData = new FormData()
-        formData.append('file', data.imageFile)
-        await fetch(`/api/recipes/${recipe.id}/image`, {
-          method: 'POST',
-          body: formData,
-        })
+        const ok = await uploadRecipeImage(recipe.id, data.imageFile)
+        if (!ok) alert('Oppskriften ble lagret, men bildet ble ikke lastet opp. Prøv å redigere den og legge til bildet på nytt.')
       }
 
       router.push(`/recipes/${recipe.id}`)
