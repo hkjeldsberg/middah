@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { fetchReelMetadata, ReelError } from '@/lib/reel'
+import { fetchInstagramMetadata, ReelError } from '@/lib/instagram'
 import { extractRecipeFromText, NotARecipeError } from '@/lib/ai/claude'
 
 // yt-dlp + Claude in sequence; well past the default serverless budget.
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     }
 
     try {
-      const meta = await fetchReelMetadata(url)
+      const meta = await fetchInstagramMetadata(url)
       sourceText = meta.description
     } catch (err) {
       if (err instanceof ReelError) {

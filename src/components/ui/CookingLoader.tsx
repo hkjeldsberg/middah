@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 
-/** Roughly tracks the real phases: yt-dlp fetches the reel, then Claude reads it. */
-export const REEL_STAGES = [
-  'Åpner reelen…',
+/** Roughly tracks the real phases: yt-dlp fetches the post, then Claude reads it. */
+export const POST_STAGES = [
+  'Åpner innlegget…',
   'Leser beskrivelsen…',
   'Fisker ut ingrediensene…',
   'Regner om mengdene…',
@@ -13,7 +13,7 @@ export const REEL_STAGES = [
   'Pynter på oppskriften…',
 ]
 
-/** No reel to fetch when the text is pasted straight in. */
+/** Nothing to fetch when the text is pasted straight in. */
 export const TEXT_STAGES = [
   'Leser teksten…',
   'Fisker ut ingrediensene…',
@@ -30,7 +30,7 @@ interface CookingLoaderProps {
 }
 
 export default function CookingLoader({
-  stages = REEL_STAGES,
+  stages = POST_STAGES,
   interval = 4000,
 }: CookingLoaderProps) {
   const [stage, setStage] = useState(0)

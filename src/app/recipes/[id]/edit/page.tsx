@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import RecipeForm from '@/components/recipe/RecipeForm'
+import { uploadRecipeImage } from '@/lib/recipeImage'
 import type { RecipeFormData } from '@/components/recipe/RecipeForm'
 import type { Recipe, RecipeRow } from '@/types'
 import { rowToRecipe } from '@/types'
@@ -28,20 +29,25 @@ export default function EditRecipePage() {
   const handleSubmit = async (data: RecipeFormData) => {
     setIsSubmitting(true)
     try {
-      const res = await fetch(`/api/recipes/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: data.name,
-          description: data.description || null,
-          category: data.category,
-          protein_source: data.proteinSource,
-          servings: data.servings,
-          prep_time: data.prepTime,
-          ingredientGroups: data.ingredientGroups,
-          instructionGroups: data.instructionGroups,
+      // The image goes to storage, the rest to the recipe tables, so both can
+      // run at once instead of making the upload wait for the save.
+      const [res, imageOk] = await Promise.all([
+        fetch(`/api/recipes/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: data.name,
+            description: data.description || null,
+            category: data.category,
+            protein_source: data.proteinSource,
+            servings: data.servings,
+            prep_time: data.prepTime,
+            ingredientGroups: data.ingredientGroups,
+            instructionGroups: data.instructionGroups,
+          }),
         }),
-      })
+        data.imageFile ? uploadRecipeImage(id, data.imageFile) : Promise.resolve(true),
+      ])
 
       if (!res.ok) {
         const err = await res.json()
@@ -49,13 +55,8 @@ export default function EditRecipePage() {
         return
       }
 
-      if (data.imageFile) {
-        const formData = new FormData()
-        formData.append('file', data.imageFile)
-        await fetch(`/api/recipes/${id}/image`, {
-          method: 'POST',
-          body: formData,
-        })
+      if (!imageOk) {
+        alert('Oppskriften ble lagret, men bildet ble ikke lastet opp. Prøv på nytt.')
       }
 
       router.push(`/recipes/${id}`)

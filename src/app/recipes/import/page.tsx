@@ -5,13 +5,13 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import RecipeDetail from '@/components/recipe/RecipeDetail'
 import ImagePicker from '@/components/recipe/ImagePicker'
-import CookingLoader, { REEL_STAGES, TEXT_STAGES } from '@/components/ui/CookingLoader'
+import CookingLoader, { POST_STAGES, TEXT_STAGES } from '@/components/ui/CookingLoader'
 import { generatedToRecipe, recipeToCreatePayload } from '@/lib/generatedToRecipe'
 import { uploadRecipeImage } from '@/lib/recipeImage'
 import type { Recipe } from '@/types'
 import type { GeneratedRecipe } from '@/lib/ai/claude'
 
-export default function ImportReelPage() {
+export default function ImportInstagramPage() {
   const router = useRouter()
 
   const [mode, setMode] = useState<'url' | 'text'>('url')
@@ -92,8 +92,8 @@ export default function ImportReelPage() {
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Hent fra Instagram</h1>
         <p className="mt-1 text-gray-600">
-          Lim inn en reel-lenke, eller teksten fra beskrivelsen, så lager Middah en
-          oppskrift av den.
+          Lim inn en lenke til en reel eller et innlegg — eller teksten fra
+          bildeteksten — så lager Middah en oppskrift av den.
         </p>
       </div>
 
@@ -119,31 +119,31 @@ export default function ImportReelPage() {
 
         {mode === 'url' ? (
           <div>
-            <label htmlFor="reel-url" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="post-url" className="block text-sm font-medium text-gray-700">
               Instagram-lenke
             </label>
             <input
-              id="reel-url"
+              id="post-url"
               type="url"
               required
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              placeholder="https://www.instagram.com/reel/..."
+              placeholder="https://www.instagram.com/p/… eller /reel/…"
               className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
             />
           </div>
         ) : (
           <div>
-            <label htmlFor="reel-text" className="block text-sm font-medium text-gray-700">
-              Tekst fra reelen
+            <label htmlFor="post-text" className="block text-sm font-medium text-gray-700">
+              Tekst fra innlegget
             </label>
             <textarea
-              id="reel-text"
+              id="post-text"
               required
               rows={10}
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="Lim inn beskrivelsen — eller kommentaren — som inneholder oppskriften."
+              placeholder="Lim inn bildeteksten — eller kommentaren — som inneholder oppskriften."
               className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
             />
             <p className="mt-1 text-xs text-gray-500">
@@ -153,11 +153,11 @@ export default function ImportReelPage() {
         )}
 
         <div>
-          <label htmlFor="reel-instructions" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="post-instructions" className="block text-sm font-medium text-gray-700">
             Egne instruksjoner <span className="text-gray-400">(valgfritt)</span>
           </label>
           <textarea
-            id="reel-instructions"
+            id="post-instructions"
             rows={3}
             value={instructions}
             onChange={(e) => setInstructions(e.target.value)}
@@ -197,7 +197,7 @@ export default function ImportReelPage() {
       )}
 
       {isExtracting && (
-        <CookingLoader stages={mode === 'url' ? REEL_STAGES : TEXT_STAGES} />
+        <CookingLoader stages={mode === 'url' ? POST_STAGES : TEXT_STAGES} />
       )}
 
       {recipe && (

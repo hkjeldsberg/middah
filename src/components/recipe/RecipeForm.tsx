@@ -250,7 +250,7 @@ export default function RecipeForm({
                 <div key={ii} className="grid grid-cols-12 gap-1">
                   <input value={ing.displayName} onChange={e => updateIngredient(gi, ii, 'displayName', e.target.value)}
                     className="col-span-4 h-9 px-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-gray-900" placeholder="Ingrediens" />
-                  <input type="number" min="0" step="0.1" value={ing.amount} onChange={e => updateIngredient(gi, ii, 'amount', e.target.value)}
+                  <input type="number" min="0" step="any" value={ing.amount} onChange={e => updateIngredient(gi, ii, 'amount', e.target.value)}
                     className="col-span-3 h-9 px-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-gray-900" placeholder="0" />
                   <input value={ing.unit} onChange={e => updateIngredient(gi, ii, 'unit', e.target.value)}
                     className="col-span-3 h-9 px-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-gray-900" placeholder="g / stk" />
