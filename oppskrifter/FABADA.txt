@@ -1,0 +1,37 @@
+name: Fabada asturiana
+
+description: Klassisk bønnegryte fra Asturias med store, kremete fabes-bønner, chorizo, morcilla og spekeflesk, langtidskokt med safran og laurbær. Bønnene er perfekte når de lar seg mose uten motstand og er kremete inni.
+category: middag
+protein: svin
+servings: 6
+prepTime: 3–4 timer + bløtlegging
+image: fabada.jpeg
+
+[ingredienser]
+
+1 kg fabes asturianas
+100 g spekeflesk
+2 stk chorizo asturiano
+2 stk morcilla asturiana
+1 dl olivenolje
+1 klype safran
+1 stk laurbærblad
+mineralvann
+salt
+
+[fremgangsmåte]
+
+## Bløtlegging
+
+Legg {fabes asturianas} i bløt i 12 timer i en stor bolle med godt med mineralvann over.
+Legg også {spekeflesk} i bløt i de samme 12 timene.
+
+## Koking
+
+Hell av og skyll bønnene. Skyll spekeflesket, og skyll {chorizo asturiano} og {morcilla asturiana} i varmt vann.
+Legg alt i en vid gryte sammen med {olivenolje} og {laurbærblad}, og dekk med kaldt vann, ca. to fingre over.
+Sett gryta på middels varme. Når det begynner å koke, skru ned til lavest mulig varme og la det trekke veldig forsiktig uten å boble. Skum av urenheter ved behov.
+Etter 40 minutter: tilsett {safran} som er lett ristet på forhånd. Stikk hull på chorizoen og morcillaen så de slipper fettet sitt.
+Kok i totalt 1 time og 45 minutter til 2 timer og 15 minutter. Vipp gryta i hankene innimellom, så bønnene slipper stivelsen sin og kraften tykner.
+Trengs mer væske, tilsett varmt vann. Aldri kaldt.
+Når bønnene er møre, smak til med salt. Ta ut laurbærbladet og la gryta hvile i 15 minutter før servering.

@@ -50,6 +50,9 @@ export default function RecipeSteps({ groups, renderStep, recipeId }: RecipeStep
   }
 
   function handleStepClick(index: number, stepId: string) {
+    // Don't toggle when the user is selecting text to copy
+    if (window.getSelection()?.toString()) return
+
     const state = getState(index, stepId)
 
     if (state === 'active') {
@@ -100,7 +103,7 @@ export default function RecipeSteps({ groups, renderStep, recipeId }: RecipeStep
                   key={step.id}
                   onClick={() => handleStepClick(index, step.id)}
                   className={[
-                    'flex items-start gap-3 rounded-lg px-3 py-2 cursor-pointer select-none transition-all',
+                    'flex items-start gap-3 rounded-lg px-3 py-2 cursor-pointer transition-all',
                     state === 'active' && 'bg-orange-50 border-l-4 border-orange-400',
                     state === 'done' && 'opacity-40',
                     state === 'upcoming' && 'opacity-70 hover:opacity-90',

@@ -1,0 +1,43 @@
+name: Kyllingsnadder
+description: Kylling med karamellisert løk og paprika på sprøtt flatbrød, toppet med frisk salat og hvitløksdip. Restaurant-inspirert fajitasalat.
+category: middag
+protein: kylling
+servings: 2
+prepTime: 35 min
+image: kyllingsnadder.jpeg
+[ingredienser]
+## Kylling og krydder
+400 g kyllingfilet i strimler
+2 ss olivenolje
+1 ts paprikapulver
+1 ts spisskummen
+1 fedd hvitløk
+1 ts salt
+½ ts pepper
+## Grønnsaker
+2 stk gul løk i båter
+1 stk rød paprika i strimler
+3 stk vårløk finhakket
+8 stk cherrytomater halvert
+## Salat og brød
+1 stk romanosalat i biter
+2 stk flatbrød eller naan
+## Hvitløksdip
+4 ss majones
+2 ss gresk yoghurt
+1 fedd hvitløk
+1 ts sitronsaft
+[fremgangsmåte]
+## Kylling og krydder
+Bland {kyllingfilet i strimler} med {olivenolje}, {paprikapulver}, {spisskummen}, {hvitløk}, {salt} og {pepper}.
+La marinere i minst 15 minutter.
+Stek kyllingen i en het panne til den er gyllenbrun og gjennomstekt, ca. 6-8 minutter. Ta ut og sett til side.
+## Grønnsaker
+I samme panne, stek {gul løk i båter} og {rød paprika i strimler} på middels-høy varme til de er myke og lett karamelliserte, ca. 8-10 minutter.
+Bland kyllingen inn igjen mot slutten og varm sammen et minutt.
+## Hvitløksdip
+Rør sammen {majones}, {gresk yoghurt}, {hvitløk} og {sitronsaft} til en jevn dip. Sett kaldt til servering.
+## Sett sammen retten
+Rist {flatbrød eller naan} raskt i tørr panne eller ovn til det er varmt og litt sprøtt.
+Legg flatbrødet på en tallerken, topp med {romanosalat i biter} og {cherrytomater halvert}.
+Legg kylling-, løk- og paprikablandingen oppå. Dryss over {vårløk finhakket} og server med hvitløksdippen ved siden av.
